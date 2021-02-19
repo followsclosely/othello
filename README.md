@@ -1,10 +1,10 @@
-# Connect Four AI Challenge
+# Reverse AI Challenge
 
 ## Getting Started
 
 ### Clone the connect-four Repository
 
-To get started you will need to first download the [code](https://github.com/followsclosely/connect-four). If you are
+To get started you will need to first download the [code](https://github.com/followsclosely/reverse). If you are
 using IntelliJ IDEA detailed instructions can be found on
 [IntelliJ website](https://www.jetbrains.com/help/idea/manage-projects-hosted-on-github.html).
 
@@ -16,7 +16,7 @@ of this Getting Started guide we will assume that you copied the directory to en
 This new entries/my-ai directory needs to be registered as a
 [subproject](https://docs.gradle.org/current/userguide/multi_project_builds.html)
 in Gradle. To register your new directory as a subproject add the following line to the root
-[settings.gradle](https://github.com/followsclosely/connect-four/blob/master/settings.gradle) file.
+[settings.gradle](https://github.com/followsclosely/reverse/blob/master/settings.gradle) file.
 
 ```properties
 include 'entries/my-ai'
@@ -29,14 +29,14 @@ Gradle.
 ### Start Authoring Your AI
 
 The directory you copied already has a class
-named [YourCustomAI](https://github.com/followsclosely/connect-four/blob/master/entries/copy-me-to-get-started/src/main/java/YourCustomAI.java)
+named [YourCustomAI](https://github.com/followsclosely/reverse/blob/master/entries/copy-me-to-get-started/src/main/java/YourCustomAI.java)
 that implements the
-[ArtificialIntelligence](https://github.com/followsclosely/connect-four/blob/master/core/src/main/java/net/wilson/games/connect/ArtificialIntelligence)
+[ArtificialIntelligence](https://github.com/followsclosely/reverse/blob/master/core/src/main/java/net/wilson/games/connect/ArtificialIntelligence)
 interface. The
-[ArtificialIntelligence](https://github.com/followsclosely/connect-four/blob/master/core/src/main/java/net/wilson/games/connect/ArtificialIntelligence)
+[ArtificialIntelligence](https://github.com/followsclosely/reverse/blob/master/core/src/main/java/net/wilson/games/connect/ArtificialIntelligence)
 interface is the only class that you need to author to implement your own AI.
 
-[ArtificialIntelligence.java](https://github.com/followsclosely/connect-four/blob/master/core/src/main/java/net/wilson/games/connect/ArtificialIntelligence.java)
+[ArtificialIntelligence.java](https://github.com/followsclosely/reverse/blob/master/core/src/main/java/net/wilson/games/connect/ArtificialIntelligence.java)
 
 ```java
 public abstract class ArtificialIntelligence {
@@ -48,14 +48,14 @@ public abstract class ArtificialIntelligence {
      * @param board The current state of the game.
      * @return The column (x) to drop the piece.
      */
-    abstract public int yourTurn(Board board);
+    abstract public Coordinate yourTurn(Board board);
 }
 ```
 
 ### Testing Your AI (Command Line)
 
 You can test your AI using the following:
-[ShellLauncher.java](https://github.com/followsclosely/connect-four/blob/master/entries/copy-me-to-get-started/src/main/java/ShellLauncher.java)
+[ShellLauncher.java](https://github.com/followsclosely/reverse/blob/master/entries/copy-me-to-get-started/src/main/java/ShellLauncher.java)
 
 ```java
 import io.github.followsclosley.reverse.Simulation;
@@ -76,7 +76,7 @@ public class ShellLauncher {
 ### Testing Your AI (Swing)
 
 You can test your AI using a graphical interface:
-[SwingLauncher.java](https://github.com/followsclosely/connect-four/blob/master/entries/copy-me-to-get-started/src/main/java/SwingLauncher.java)
+[SwingLauncher.java](https://github.com/followsclosely/reverse/blob/master/entries/copy-me-to-get-started/src/main/java/SwingLauncher.java)
 
 ```java
 import io.github.followsclosley.reverse.swing.SwingSupport;
