@@ -5,8 +5,8 @@ public class ShellLauncher {
     public static void main(String[] args) {
         new Simulation()
                 .number(200000)
-                .addArtificialIntelligence(new Dummy(1))
-                .addArtificialIntelligence(new YourCustomAI(2))
+                .addArtificialIntelligence(new Dummy())
+                .addArtificialIntelligence(new YourCustomAI())
                 .run()
                 .printSummary();
     }

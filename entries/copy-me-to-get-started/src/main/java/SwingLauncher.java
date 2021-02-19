@@ -8,7 +8,7 @@ public class SwingLauncher {
     public static void main(String[] args) {
         new SwingSupport()
                 .setBoard(new MutableBoard(8, 8))
-                .setArtificialIntelligence(new YourCustomAI(SwingSupport.COMPUTER_COLOR))
+                .setArtificialIntelligence(new YourCustomAI())
                 .run();
     }
 }

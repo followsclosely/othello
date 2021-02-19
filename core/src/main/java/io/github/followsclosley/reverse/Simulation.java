@@ -39,7 +39,7 @@ public class Simulation {
             System.out.println("ERROR: ai not provided, call addArtificialIntelligence()");
             return this;
         } else if (ais.size() == 1) {
-            ais.add(0, new Dummy(1));
+            ais.add(0, new Dummy());
         }
 
         for (int i = 0; i < numberOfSimulations; i++) {

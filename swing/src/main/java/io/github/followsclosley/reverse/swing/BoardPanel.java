@@ -80,7 +80,7 @@ public class BoardPanel extends JPanel implements BoardChangedListener, MouseMot
                 g.fillRoundRect(c.getX() * 50 + 3, c.getY() * 50 + 3, 39, 39, 39, 39);
             }
 
-            g.setColor( (flips.getFlips().size() > 0) ? COLORS[board.getTurn() + 1] : COLORS_ALPHA[board.getTurn() + 1]);
+            g.setColor((flips.getFlips().size() > 0) ? COLORS[board.getTurn() + 1] : COLORS_ALPHA[board.getTurn() + 1]);
             g.fillRoundRect(flips.getMove().getX() * 50 + 3, flips.getMove().getY() * 50 + 3, 39, 39, 39, 39);
         }
     }
@@ -88,7 +88,7 @@ public class BoardPanel extends JPanel implements BoardChangedListener, MouseMot
     @Override
     public void boardChanged(Coordinate coordinate) {
         this.flips = null;
-        repaint();
+        SwingUtilities.invokeLater(() -> repaint());
     }
 
     @Override
@@ -100,11 +100,10 @@ public class BoardPanel extends JPanel implements BoardChangedListener, MouseMot
             lastx = x;
             lasty = y;
             flips = ReverseUtils.canMove(board, new Coordinate(x, y), board.getTurn());
-            repaint();
+            SwingUtilities.invokeLater(() -> repaint());
         }
     }
 
     @Override
-    public void mouseDragged(MouseEvent e) {
-    }
+    public void mouseDragged(MouseEvent e) { }
 }

@@ -20,14 +20,14 @@ import java.awt.event.MouseEvent;
  */
 public class SwingSupport {
 
-    public static final int PLAYER_COLOR = -1;
-    public static final int COMPUTER_COLOR = 1;
     private ArtificialIntelligence bot;
+
     private MutableBoard board;
+    private BoardPanel boardPanel;
 
     public static void main(String[] args) {
         new SwingSupport()
-                .setArtificialIntelligence(new Dummy(COMPUTER_COLOR))
+                .setArtificialIntelligence(new Dummy())
                 .run();
     }
 
@@ -66,11 +66,11 @@ public class SwingSupport {
             board.setPiece(new Coordinate(centerX + 1, centerY), 1);
         }
 
-        BoardPanel boardPanel = new BoardPanel(board);
-        boardPanel.addMouseMotionListener(boardPanel);
+        this.boardPanel = new BoardPanel(board);
+        this.boardPanel.addMouseMotionListener(boardPanel);
 
         //Register a listener to capture when a piece is to be played.
-        boardPanel.addMouseListener(new MouseAdapter() {
+        this.boardPanel.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
 
                 int x = e.getX() / 50;
@@ -80,19 +80,16 @@ public class SwingSupport {
                 ReverseUtils.TurnContext context = ReverseUtils.canMove(board, coordinate, board.getTurn());
                 if (context.getFlips().size() > 0) {
 
-                    //This craziness is here to support undo.
-                    boardPanel.setBoard(board = board.backup());
+                    SwingUtilities.invokeLater(() -> playPiece(coordinate));
 
-                    board.setPiece(coordinate, board.getTurn());
-                    for (Coordinate c : context.getFlips()) {
-                        board.setPiece(c, board.getTurn());
-                    }
-                    board.incrementTurn();
+                    //The bots turn...
+                    new Thread(() -> {
+                        try { Thread.sleep(500); } catch (InterruptedException ignore) { }
+                        SwingUtilities.invokeLater(() -> playPiece(bot.yourTurn(board)));
+                    }).start();
                 }
             }
         });
-
-        //board.addBoardChangedListener(coordinate -> SwingUtilities.invokeLater(() -> boardPanel.repaint()));
 
         JPanel statusPanel = new JPanel(new BorderLayout());
         JTextField status = new JTextField("...");
@@ -116,5 +113,22 @@ public class SwingSupport {
         frame.add(statusPanel, BorderLayout.SOUTH);
         frame.pack();
         frame.setVisible(true);
+    }
+
+    private void playPiece(Coordinate coordinate) {
+        if (coordinate != null) {
+            ReverseUtils.TurnContext context = ReverseUtils.canMove(board, coordinate, board.getTurn());
+            if (context.getFlips().size() > 0) {
+                //This craziness is here to support undo.
+                boardPanel.setBoard(board = board.backup());
+                board.setPiece(coordinate, board.getTurn());
+                for (Coordinate c : context.getFlips()) {
+                    board.setPiece(c, board.getTurn());
+                }
+                board.incrementTurn();
+            }
+        } else {
+            board.incrementTurn();
+        }
     }
 }

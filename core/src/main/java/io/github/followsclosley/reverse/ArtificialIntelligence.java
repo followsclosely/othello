@@ -10,13 +10,6 @@ import io.github.followsclosley.reverse.impl.ai.Dummy;
 public interface ArtificialIntelligence {
 
     /**
-     * Gets the color that the AI is playing for.
-     *
-     * @return color of the AI player
-     */
-    public int getColor();
-
-    /**
      * This method is called by the Engine when it is "your" turn to play.
      * It should return the column to drop the piece down.
      *

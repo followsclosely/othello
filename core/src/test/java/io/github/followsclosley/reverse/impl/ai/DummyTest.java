@@ -7,7 +7,7 @@ public class DummyTest {
 
     @Test
     public void yourTurnHasNoSpacesLeft() {
-        Dummy dummy = new Dummy(7);
+        Dummy dummy = new Dummy();
         MutableBoard board = new MutableBoard(3, 3);
 
         //Fill the board.
@@ -23,7 +23,7 @@ public class DummyTest {
 
     @Test
     public void alwaysInBounds() {
-        Dummy dummy = new Dummy(7);
+        Dummy dummy = new Dummy();
         MutableBoard board = new MutableBoard(8, 8);
 
         //Fill the board.
