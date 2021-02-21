@@ -4,7 +4,6 @@ import io.github.followsclosley.reverse.impl.ImmutableBoard;
 import io.github.followsclosley.reverse.impl.MutableBoard;
 import io.github.followsclosley.reverse.impl.ReverseUtils;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -79,7 +78,7 @@ public class Engine {
         int flips = 0;
 
         if (coordinate != null) {
-            ReverseUtils.TurnContext context = ReverseUtils.canMove(board, coordinate);
+            ReverseUtils.TurnContext context = ReverseUtils.getTurnContext(board, coordinate);
             if (context.getFlips().size() > 0) {
                 board.setPiece(coordinate, board.getTurn());
                 for (Coordinate c : context.getFlips()) {

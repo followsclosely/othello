@@ -36,7 +36,7 @@ public class Dummy implements ArtificialIntelligence {
             for (int y = 0; y < board.getHeight(); y++) {
 
                 if (board.getPiece(x, y) == 0) {
-                    ReverseUtils.TurnContext context = ReverseUtils.canMove(board, new Coordinate(x, y));
+                    ReverseUtils.TurnContext context = ReverseUtils.getTurnContext(board, new Coordinate(x, y));
                     int counts = context.getFlips().size();
 
                     if ( (DEFAULT_MODE == Integer.MAX_VALUE && (counts > 0 && counts >= maxFlips))

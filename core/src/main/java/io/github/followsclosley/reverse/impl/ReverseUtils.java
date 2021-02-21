@@ -20,7 +20,8 @@ public class ReverseUtils {
 
         return board;
     }
-    public static TurnContext canMove(Board board, Coordinate coordinate) {
+
+    public static TurnContext getTurnContext(Board board, Coordinate coordinate) {
 
         TurnContext context = new TurnContext(board, coordinate);
 

@@ -29,7 +29,7 @@ Gradle.
 ### Start Authoring Your AI
 
 The directory you copied already has a class
-named [YourCustomAI](https://github.com/followsclosely/reverse/blob/master/entries/copy-me-to-get-started/src/main/java/YourCustomAI.java)
+named [io.github.followsclosley.reverse.ai.ScoreStrategy](https://github.com/followsclosely/reverse/blob/master/entries/copy-me-to-get-started/src/main/java/io.github.followsclosley.reverse.ai.ScoreStrategy.java)
 that implements the
 [ArtificialIntelligence](https://github.com/followsclosely/reverse/blob/master/core/src/main/java/net/wilson/games/connect/ArtificialIntelligence)
 interface. The
@@ -66,7 +66,7 @@ public class ShellLauncher {
         new Simulation()
                 .number(200000)
                 .addArtificialIntelligence(new Dummy(1))
-                .addArtificialIntelligence(new YourCustomAI(2))
+                .addArtificialIntelligence(new io.github.followsclosley.reverse.ai.ScoreStrategy(2))
                 .run()
                 .printSummary();
     }
@@ -86,7 +86,7 @@ public class SwingLauncher {
     public static void main(String[] args) {
         new SwingSupport()
                 .setBoard(new MutableBoard())
-                .setArtificialIntelligence(new YourCustomAI(SwingSupport.COMPUTER_COLOR))
+                .setArtificialIntelligence(new io.github.followsclosley.reverse.ai.ScoreStrategy(SwingSupport.COMPUTER_COLOR))
                 .run();
     }
 }

@@ -69,7 +69,7 @@ public class SwingSupport {
                 int y = e.getY() / 50;
 
                 Coordinate coordinate = new Coordinate(x, y);
-                ReverseUtils.TurnContext context = ReverseUtils.canMove(board, coordinate);
+                ReverseUtils.TurnContext context = ReverseUtils.getTurnContext(board, coordinate);
                 if (context.getFlips().size() > 0) {
 
                     SwingUtilities.invokeLater(() -> playPiece(coordinate));
@@ -109,7 +109,7 @@ public class SwingSupport {
 
     private void playPiece(Coordinate coordinate) {
         if (coordinate != null) {
-            ReverseUtils.TurnContext context = ReverseUtils.canMove(board, coordinate);
+            ReverseUtils.TurnContext context = ReverseUtils.getTurnContext(board, coordinate);
             if (context.getFlips().size() > 0) {
                 //This craziness is here to support undo.
                 boardPanel.setBoard(board = board.backup());

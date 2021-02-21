@@ -99,7 +99,7 @@ public class BoardPanel extends JPanel implements BoardChangedListener, MouseMot
         if (x != lastx || y != lasty) {
             lastx = x;
             lasty = y;
-            flips = ReverseUtils.canMove(board, new Coordinate(x, y));
+            flips = ReverseUtils.getTurnContext(board, new Coordinate(x, y));
             SwingUtilities.invokeLater(() -> repaint());
         }
     }
