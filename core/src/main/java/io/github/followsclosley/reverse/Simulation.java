@@ -37,15 +37,15 @@ public class Simulation {
 
         if (ais.size() == 0) {
             System.out.println("ERROR: ai not provided, call addArtificialIntelligence()");
+            System.exit(1);
             return this;
         } else if (ais.size() == 1) {
             ais.add(0, new Dummy());
         }
 
         for (int i = 0; i < numberOfSimulations; i++) {
-
             Engine engine = new Engine(ais.toArray(new ArtificialIntelligence[ais.size()]));
-            int winner = engine.startGame(i % ais.size());
+            int winner = engine.startGame(i%2);
             counts.get(winner).getAndIncrement();
         }
 
@@ -68,5 +68,14 @@ public class Simulation {
     public Simulation reset() {
         counts.clear();
         return this;
+    }
+
+    public static void main(String[] args) {
+        new Simulation()
+                .number(100000)
+                .addArtificialIntelligence(new Dummy().setMode(Integer.MIN_VALUE))
+                .addArtificialIntelligence(new Dummy().setMode(Integer.MAX_VALUE))
+                .run()
+                .printSummary();
     }
 }

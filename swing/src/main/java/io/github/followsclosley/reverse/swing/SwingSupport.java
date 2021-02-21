@@ -55,16 +55,8 @@ public class SwingSupport {
      * Launches the JFrame that contains the BoardPanel to display the game.
      */
     public void run() {
-        if (board == null) {
-            board = new MutableBoard(8, 8);
-            int centerX = board.getWidth() / 2 - 1;
-            int centerY = board.getHeight() / 2 - 1;
 
-            board.setPiece(new Coordinate(centerX, centerY), -1);
-            board.setPiece(new Coordinate(centerX + 1, centerY + 1), -1);
-            board.setPiece(new Coordinate(centerX, centerY + 1), 1);
-            board.setPiece(new Coordinate(centerX + 1, centerY), 1);
-        }
+        board = ReverseUtils.initialize(new MutableBoard(8, 8));
 
         this.boardPanel = new BoardPanel(board);
         this.boardPanel.addMouseMotionListener(boardPanel);
@@ -77,7 +69,7 @@ public class SwingSupport {
                 int y = e.getY() / 50;
 
                 Coordinate coordinate = new Coordinate(x, y);
-                ReverseUtils.TurnContext context = ReverseUtils.canMove(board, coordinate, board.getTurn());
+                ReverseUtils.TurnContext context = ReverseUtils.canMove(board, coordinate);
                 if (context.getFlips().size() > 0) {
 
                     SwingUtilities.invokeLater(() -> playPiece(coordinate));
@@ -117,7 +109,7 @@ public class SwingSupport {
 
     private void playPiece(Coordinate coordinate) {
         if (coordinate != null) {
-            ReverseUtils.TurnContext context = ReverseUtils.canMove(board, coordinate, board.getTurn());
+            ReverseUtils.TurnContext context = ReverseUtils.canMove(board, coordinate);
             if (context.getFlips().size() > 0) {
                 //This craziness is here to support undo.
                 boardPanel.setBoard(board = board.backup());

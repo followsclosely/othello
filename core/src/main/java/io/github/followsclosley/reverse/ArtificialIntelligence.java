@@ -16,5 +16,5 @@ public interface ArtificialIntelligence {
      * @param board The current state of the game.
      * @return The column (x) to drop the piece.
      */
-    abstract public Coordinate yourTurn(Board board);
+    Coordinate yourTurn(Board board);
 }

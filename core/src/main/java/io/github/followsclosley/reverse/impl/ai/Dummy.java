@@ -28,7 +28,7 @@ public class Dummy implements ArtificialIntelligence {
     @Override
     public Coordinate yourTurn(Board board) {
 
-        int maxFlips = (DEFAULT_MODE == Integer.MAX_VALUE) ? Integer.MAX_VALUE : Integer.MAX_VALUE;
+        int maxFlips = (DEFAULT_MODE == Integer.MAX_VALUE) ? Integer.MIN_VALUE : Integer.MAX_VALUE;
 
         List<Coordinate> flips = new ArrayList<>();
 
@@ -36,7 +36,7 @@ public class Dummy implements ArtificialIntelligence {
             for (int y = 0; y < board.getHeight(); y++) {
 
                 if (board.getPiece(x, y) == 0) {
-                    ReverseUtils.TurnContext context = ReverseUtils.canMove(board, new Coordinate(x, y), board.getTurn());
+                    ReverseUtils.TurnContext context = ReverseUtils.canMove(board, new Coordinate(x, y));
                     int counts = context.getFlips().size();
 
                     if ( (DEFAULT_MODE == Integer.MAX_VALUE && (counts > 0 && counts >= maxFlips))
@@ -50,7 +50,7 @@ public class Dummy implements ArtificialIntelligence {
 
         return flips.isEmpty() ? null : flips.get(random.nextInt(flips.size()));
     }
-    
+
     public Dummy setMode(Integer mode){
         DEFAULT_MODE = mode;
         return this;

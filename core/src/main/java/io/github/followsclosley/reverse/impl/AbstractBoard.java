@@ -59,7 +59,8 @@ public abstract class AbstractBoard implements Board {
         for (int y = 0; y < board.getHeight(); y++) {
             b.append("     ").append(y).append(": ");
             for (int x = 0; x < board.getWidth(); x++) {
-                b.append(board.getPiece(x, y)).append(" ");
+                int p = board.getPiece(x, y);
+                b.append( p == -1 ? '-' : p == 1 ? '+' : '0').append(" ");
             }
             b.append("\n");
         }

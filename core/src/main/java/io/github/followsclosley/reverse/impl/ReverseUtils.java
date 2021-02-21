@@ -8,9 +8,21 @@ import java.util.List;
 
 public class ReverseUtils {
 
-    public static TurnContext canMove(Board board, Coordinate coordinate, int turn) {
+    public static MutableBoard initialize(MutableBoard board){
 
-        TurnContext context = new TurnContext(board, coordinate, turn);
+        int centerX = board.getWidth() / 2 - 1;
+        int centerY = board.getHeight() / 2 - 1;
+
+        board.setPiece(new Coordinate(centerX, centerY), -1);
+        board.setPiece(new Coordinate(centerX + 1, centerY + 1), -1);
+        board.setPiece(new Coordinate(centerX, centerY + 1), 1);
+        board.setPiece(new Coordinate(centerX + 1, centerY), 1);
+
+        return board;
+    }
+    public static TurnContext canMove(Board board, Coordinate coordinate) {
+
+        TurnContext context = new TurnContext(board, coordinate);
 
         if (board.getPiece(coordinate.getX(), coordinate.getY()) == 0) {
             getFlipCount(context, 1, 0);
@@ -39,12 +51,12 @@ public class ReverseUtils {
 
             if (color == 0) {
                 break;
-            } else if (color == c.getTurn()) {
+            } else if (color == c.getBoard().getTurn()) {
                 if (flips.size() > 0) {
                     c.getFlips().addAll(flips);
                 }
                 break;
-            } else if (color != c.getTurn()) {
+            } else if (color != c.getBoard().getTurn()) {
                 flips.add(new Coordinate(x, y));
             }
         }
@@ -54,15 +66,13 @@ public class ReverseUtils {
 
     public static class TurnContext {
 
-        private int turn;
         private Board board;
         private Coordinate move;
         private List<Coordinate> flips;
 
-        public TurnContext(Board board, Coordinate move, int turn) {
+        public TurnContext(Board board, Coordinate move) {
             this.board = board;
             this.move = move;
-            this.turn = turn;
             this.flips = new ArrayList<>();
         }
 
@@ -76,10 +86,6 @@ public class ReverseUtils {
 
         public Coordinate getMove() {
             return move;
-        }
-
-        public int getTurn() {
-            return turn;
         }
     }
 }
