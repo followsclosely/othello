@@ -10,5 +10,4 @@ public class ScoreStrategyTest extends TestCase {
 
         System.out.println(strategy);
     }
-
 }

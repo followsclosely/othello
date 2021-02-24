@@ -5,8 +5,6 @@ import io.github.followsclosley.reverse.Board;
 import io.github.followsclosley.reverse.Coordinate;
 import io.github.followsclosley.reverse.impl.ReverseUtils;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 /**
