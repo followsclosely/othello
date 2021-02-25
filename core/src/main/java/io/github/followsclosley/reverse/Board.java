@@ -8,4 +8,6 @@ public interface Board {
     int getHeight();
 
     int getPiece(int x, int y);
+
+    Turn getTurnContext(Coordinate coordinate);
 }

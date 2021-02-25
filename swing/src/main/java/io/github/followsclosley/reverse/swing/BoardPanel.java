@@ -3,9 +3,9 @@ package io.github.followsclosley.reverse.swing;
 
 import io.github.followsclosley.reverse.Board;
 import io.github.followsclosley.reverse.Coordinate;
+import io.github.followsclosley.reverse.Turn;
 import io.github.followsclosley.reverse.impl.BoardChangedListener;
 import io.github.followsclosley.reverse.impl.MutableBoard;
-import io.github.followsclosley.reverse.impl.ReverseUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +20,7 @@ import java.awt.event.MouseMotionListener;
 public class BoardPanel extends JPanel implements BoardChangedListener, MouseMotionListener {
 
     private int lastx = -1, lasty = -1;
-    private ReverseUtils.TurnContext flips = null;
+    private Turn flips = null;
 
     private Dimension defaultDimension;
     private Color DEFAULR_BOARD_COLOR = Color.GREEN.darker().darker().darker();
@@ -97,11 +97,12 @@ public class BoardPanel extends JPanel implements BoardChangedListener, MouseMot
         int y = e.getY() / 50;
 
         if (x != lastx || y != lasty) {
-            flips = ( board.getPiece(lastx = x, lasty = y) == 0 ) ? ReverseUtils.getTurnContext(board, new Coordinate(x, y)) : null;
+            flips = (board.getPiece(lastx = x, lasty = y) == 0) ? board.getTurnContext(new Coordinate(x, y)) : null;
             SwingUtilities.invokeLater(() -> repaint());
         }
     }
 
     @Override
-    public void mouseDragged(MouseEvent e) { }
+    public void mouseDragged(MouseEvent e) {
+    }
 }

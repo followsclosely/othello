@@ -3,7 +3,7 @@ package io.github.followsclosley.reverse.impl.ai;
 import io.github.followsclosley.reverse.ArtificialIntelligence;
 import io.github.followsclosley.reverse.Board;
 import io.github.followsclosley.reverse.Coordinate;
-import io.github.followsclosley.reverse.impl.ReverseUtils;
+import io.github.followsclosley.reverse.Turn;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,11 +36,11 @@ public class Dummy implements ArtificialIntelligence {
             for (int y = 0; y < board.getHeight(); y++) {
 
                 if (board.getPiece(x, y) == 0) {
-                    ReverseUtils.TurnContext context = ReverseUtils.getTurnContext(board, new Coordinate(x, y));
+                    Turn context = board.getTurnContext(new Coordinate(x, y));
                     int counts = context.getFlips().size();
 
-                    if ( (DEFAULT_MODE == Integer.MAX_VALUE && (counts > 0 && counts >= maxFlips))
-                        || (DEFAULT_MODE == Integer.MIN_VALUE && (counts > 0 && counts <= maxFlips)) ){
+                    if ((DEFAULT_MODE == Integer.MAX_VALUE && (counts > 0 && counts >= maxFlips))
+                            || (DEFAULT_MODE == Integer.MIN_VALUE && (counts > 0 && counts <= maxFlips))) {
                         maxFlips = counts;
                         flips.add(context.getMove());
                     }
@@ -51,7 +51,7 @@ public class Dummy implements ArtificialIntelligence {
         return flips.isEmpty() ? null : flips.get(random.nextInt(flips.size()));
     }
 
-    public Dummy setMode(Integer mode){
+    public Dummy setMode(Integer mode) {
         DEFAULT_MODE = mode;
         return this;
     }

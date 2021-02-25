@@ -4,8 +4,8 @@
 
 ### Clone the connect-four Repository
 
-To get started you will need to first download the [code](https://github.com/followsclosely/reverse). If you are
-using IntelliJ IDEA detailed instructions can be found on
+To get started you will need to first download the [code](https://github.com/followsclosely/reverse). If you are using
+IntelliJ IDEA detailed instructions can be found on
 [IntelliJ website](https://www.jetbrains.com/help/idea/manage-projects-hosted-on-github.html).
 
 ### Create a Subproject

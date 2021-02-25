@@ -2,8 +2,8 @@ package io.github.followsclosley.reverse.swing;
 
 import io.github.followsclosley.reverse.ArtificialIntelligence;
 import io.github.followsclosley.reverse.Coordinate;
+import io.github.followsclosley.reverse.Turn;
 import io.github.followsclosley.reverse.impl.MutableBoard;
-import io.github.followsclosley.reverse.impl.ReverseUtils;
 import io.github.followsclosley.reverse.impl.ai.Dummy;
 
 import javax.swing.*;
@@ -56,7 +56,7 @@ public class SwingSupport {
      */
     public void run() {
 
-        board = ReverseUtils.initialize(new MutableBoard(8, 8));
+        board = new MutableBoard(8, 8);
 
         this.boardPanel = new BoardPanel(board);
         this.boardPanel.addMouseMotionListener(boardPanel);
@@ -69,13 +69,13 @@ public class SwingSupport {
                 int y = e.getY() / 50;
 
                 Coordinate coordinate = new Coordinate(x, y);
-                ReverseUtils.TurnContext context = ReverseUtils.getTurnContext(board, coordinate);
+                Turn context = board.getTurnContext(coordinate);
                 if (context.getFlips().size() > 0) {
 
                     SwingUtilities.invokeLater(() -> playPiece(coordinate));
 
                     //The bots turn...
-                    if( bot != null ) {
+                    if (bot != null) {
                         new Thread(() -> {
                             try {
                                 Thread.sleep(500);
@@ -114,7 +114,7 @@ public class SwingSupport {
 
     private void playPiece(Coordinate coordinate) {
         if (coordinate != null) {
-            ReverseUtils.TurnContext context = ReverseUtils.getTurnContext(board, coordinate);
+            Turn context = board.getTurnContext(coordinate);
             if (context.getFlips().size() > 0) {
                 //This craziness is here to support undo.
                 boardPanel.setBoard(board = board.backup());

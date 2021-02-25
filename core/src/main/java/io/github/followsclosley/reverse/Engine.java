@@ -2,7 +2,6 @@ package io.github.followsclosley.reverse;
 
 import io.github.followsclosley.reverse.impl.ImmutableBoard;
 import io.github.followsclosley.reverse.impl.MutableBoard;
-import io.github.followsclosley.reverse.impl.ReverseUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,7 +37,7 @@ public class Engine {
      */
     public int startGame(int firstIndex) {
 
-        MutableBoard board = ReverseUtils.initialize(new MutableBoard(8, 8));
+        MutableBoard board = new MutableBoard(8, 8);
         int winner = 0;
         int total = board.getWidth() * board.getHeight();
         //System.out.println(board);
@@ -66,7 +65,7 @@ public class Engine {
 
         for (int x = 0; x < board.getWidth(); x++) {
             for (int y = 0; y < board.getHeight(); y++) {
-                counts.get(board.getPiece(x,y)).incrementAndGet();
+                counts.get(board.getPiece(x, y)).incrementAndGet();
             }
         }
 
@@ -78,7 +77,7 @@ public class Engine {
         int flips = 0;
 
         if (coordinate != null) {
-            ReverseUtils.TurnContext context = ReverseUtils.getTurnContext(board, coordinate);
+            Turn context = board.getTurnContext(coordinate);
             if (context.getFlips().size() > 0) {
                 board.setPiece(coordinate, board.getTurn());
                 for (Coordinate c : context.getFlips()) {

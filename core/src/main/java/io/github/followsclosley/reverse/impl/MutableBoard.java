@@ -14,6 +14,7 @@ public class MutableBoard extends AbstractBoard {
 
     public MutableBoard(int width, int height) {
         this.state = new int[this.width = width][this.height = height];
+        reset();
     }
 
     public MutableBoard(Board board) {
@@ -26,7 +27,26 @@ public class MutableBoard extends AbstractBoard {
         }
     }
 
-    public int getPiece(Coordinate c) { return super.getPiece(c.getX(), c.getY()); }
+    public int getPiece(Coordinate c) {
+        return super.getPiece(c.getX(), c.getY());
+    }
+
+    public void reset() {
+
+        int centerX = getWidth() / 2 - 1;
+        int centerY = getHeight() / 2 - 1;
+
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                this.state[x][y] = 0;
+            }
+        }
+
+        setPiece(new Coordinate(centerX, centerY), -1);
+        setPiece(new Coordinate(centerX + 1, centerY + 1), -1);
+        setPiece(new Coordinate(centerX, centerY + 1), 1);
+        setPiece(new Coordinate(centerX + 1, centerY), 1);
+    }
 
     /**
      * This method clones the current board and sets the
