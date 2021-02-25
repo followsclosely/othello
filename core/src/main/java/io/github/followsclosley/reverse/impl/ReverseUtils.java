@@ -25,25 +25,27 @@ public class ReverseUtils {
 
         TurnContext c = new TurnContext(board, coordinate);
 
-        ArrayList<Coordinate> flips = new ArrayList<>();
-        for(int deltaX = -1; deltaX<=1; deltaX++){
-            for(int deltaY = -1; deltaY<=1; deltaY++){
+        if( board.getPiece(coordinate.getX(), coordinate.getY()) == 0) {
+            ArrayList<Coordinate> flips = new ArrayList<>();
+            for (int deltaX = -1; deltaX <= 1; deltaX++) {
+                for (int deltaY = -1; deltaY <= 1; deltaY++) {
 
-                if( deltaX != 0 && deltaY != 0 ) {
-                    flips.clear();
-                    for (int x = c.getMove().getX() + deltaX, y = c.getMove().getY() + deltaY; x < c.getBoard().getWidth() && x >= 0 && y < c.getBoard().getHeight() && y >= 0; x += deltaX, y += deltaY) {
+                    if (deltaX != 0 || deltaY != 0) {
+                        flips.clear();
+                        for (int x = c.getMove().getX() + deltaX, y = c.getMove().getY() + deltaY; x < c.getBoard().getWidth() && x >= 0 && y < c.getBoard().getHeight() && y >= 0; x += deltaX, y += deltaY) {
 
-                        int color = c.getBoard().getPiece(x, y);
+                            int color = c.getBoard().getPiece(x, y);
 
-                        if (color == 0) {
-                            break;
-                        } else if (color == c.getBoard().getTurn()) {
-                            if (flips.size() > 0) {
-                                c.getFlips().addAll(flips);
+                            if (color == 0) {
+                                break;
+                            } else if (color == c.getBoard().getTurn()) {
+                                if (flips.size() > 0) {
+                                    c.getFlips().addAll(flips);
+                                }
+                                break;
+                            } else if (color != c.getBoard().getTurn()) {
+                                flips.add(new Coordinate(x, y));
                             }
-                            break;
-                        } else if (color != c.getBoard().getTurn()) {
-                            flips.add(new Coordinate(x, y));
                         }
                     }
                 }

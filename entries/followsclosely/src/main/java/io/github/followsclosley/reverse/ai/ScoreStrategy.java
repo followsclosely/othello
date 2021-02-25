@@ -20,10 +20,10 @@ public class ScoreStrategy implements ArtificialIntelligence {
             scores = new int[board.getWidth()][board.getHeight()];
 
             int template[][] = {
-                    {100,-100,10, 8},
-                    {-100,-100,-5,-3},
-                    {10,-5,10,0},
-                    {8,-3,0,0}
+                    { 100, -100, 10,  8},
+                    {-100, -100, -5, -3},
+                    {  10,   -5, 10,  0},
+                    {   8,   -3,  0,  0}
             };
 
             for(int x=0, width = board.getWidth()-1, tWidth = template.length; x<tWidth; x++){
@@ -50,6 +50,10 @@ public class ScoreStrategy implements ArtificialIntelligence {
 
         for(int x=0, width = board.getWidth(); x<width; x++) {
             for (int y = 0, height = board.getHeight(); y < height; y++) {
+
+                if( x == 2 && y == 5){
+                    System.out.println("Crap");
+                }
                 flips[x][y] = ReverseUtils.getTurnContext(board, new Coordinate(x,y));
                 myScores[x][y] = scores[x][y] - flips[x][y].getFlips().size();
             }

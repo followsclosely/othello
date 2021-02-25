@@ -75,10 +75,15 @@ public class SwingSupport {
                     SwingUtilities.invokeLater(() -> playPiece(coordinate));
 
                     //The bots turn...
-                    new Thread(() -> {
-                        try { Thread.sleep(500); } catch (InterruptedException ignore) { }
-                        SwingUtilities.invokeLater(() -> playPiece(bot.yourTurn(board)));
-                    }).start();
+                    if( bot != null ) {
+                        new Thread(() -> {
+                            try {
+                                Thread.sleep(500);
+                            } catch (InterruptedException ignore) {
+                            }
+                            SwingUtilities.invokeLater(() -> playPiece(bot.yourTurn(board)));
+                        }).start();
+                    }
                 }
             }
         });

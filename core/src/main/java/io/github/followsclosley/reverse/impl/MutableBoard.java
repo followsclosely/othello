@@ -26,6 +26,8 @@ public class MutableBoard extends AbstractBoard {
         }
     }
 
+    public int getPiece(Coordinate c) { return super.getPiece(c.getX(), c.getY()); }
+
     /**
      * This method clones the current board and sets the
      * previous. This craziness is here to support undo.
