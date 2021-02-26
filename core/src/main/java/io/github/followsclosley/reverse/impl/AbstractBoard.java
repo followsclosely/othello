@@ -42,7 +42,7 @@ public abstract class AbstractBoard implements Board {
 
     public Turn getTurnContext(Coordinate coordinate) {
 
-        Turn c = new Turn(this, coordinate);
+        Turn c = new Turn(coordinate);
 
         if (getPiece(coordinate.getX(), coordinate.getY()) == 0) {
             ArrayList<Coordinate> flips = new ArrayList<>();
